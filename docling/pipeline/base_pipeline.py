@@ -172,6 +172,9 @@ class PaginatedPipeline(BasePipeline):  # TODO this is a bad name.
 
                     end_batch_time = time.monotonic()
                     total_elapsed_time += end_batch_time - start_batch_time
+                    _log.debug(
+                        f"Evaluating pages between {page_batch[0].page_no} and {page_batch[-1].page_no} time={end_batch_time - start_batch_time:.1f}"
+                    )
                     if (
                         self.pipeline_options.document_timeout is not None
                         and total_elapsed_time > self.pipeline_options.document_timeout
@@ -183,7 +186,7 @@ class PaginatedPipeline(BasePipeline):  # TODO this is a bad name.
                         break
 
                     _log.debug(
-                        f"Finished converting page batch time={end_batch_time:.3f}"
+                        f"Finished converting pages between {page_batch[0].page_no} and {page_batch[-1].page_no} time={end_batch_time:.1f}"
                     )
 
             except Exception as e:
