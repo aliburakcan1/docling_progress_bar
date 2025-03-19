@@ -17,6 +17,11 @@ if TYPE_CHECKING:
     from docling.datamodel.document import InputDocument
 
 _log = logging.getLogger(__name__)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler = logging.StreamHandler()
+handler.setFormatter(formatter)
+_log.addHandler(handler)
+_log.setLevel(logging.DEBUG)
 
 
 class DoclingParseV2PageBackend(PdfPageBackend):
